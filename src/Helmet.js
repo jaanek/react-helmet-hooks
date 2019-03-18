@@ -22,7 +22,6 @@ export default function Helmet(props) {
 
   function mapTagsToProps(tags, newProps) {
     let collectedTags = {};
-    console.log(`mapTagsToProps! `, tags, newProps);
 
     React.Children.forEach(tags, tag => {
       if (!tag || !tag.props) { return; }
@@ -40,7 +39,6 @@ export default function Helmet(props) {
             {...tagProps, ...mapTagChildrenToProps(tag, tagChildren)}
           ]
         };
-        console.log(`Collected tags: `, collectedTags);
         break;
       }
       default: {
@@ -63,7 +61,6 @@ export default function Helmet(props) {
     });
 
     // merge props with collected multi tags
-    console.log(`Before result. Collected tags: `, collectedTags);
     let result = {...newProps};
     const tagNames = Object.keys(collectedTags);
     for (let i=0; i < tagNames.length; i++) {
@@ -73,7 +70,6 @@ export default function Helmet(props) {
         [tagName]: collectedTags[tagName]
       };
     }
-    console.log(`After result. result: `, result);
     return result;
   }
 
@@ -101,8 +97,6 @@ export default function Helmet(props) {
     const state = collectHelmet(propsList);
     setHelmet(state);
   }, [newProps]);
-
-  console.log(`Helmet props: `, newProps);
 
   return null;
 }
