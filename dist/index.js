@@ -181,17 +181,21 @@
                   newProps = _objectSpread({}, newProps, {
                     htmlAttrs: _objectSpread({}, newProps.htmlAttrs, tagProps)
                   });
+                  break;
 
                 case "body":
                   newProps = _objectSpread({}, newProps, {
                     bodyAttrs: _objectSpread({}, newProps.bodyAttrs, tagProps)
                   });
+                  break;
 
                 case "title":
                   newProps = _objectSpread({}, newProps, (_objectSpread3 = {}, _defineProperty(_objectSpread3, tag.type, tagChildren), _defineProperty(_objectSpread3, "titleAttrs", _objectSpread({}, tagProps)), _objectSpread3));
+                  break;
 
                 default:
                   newProps = _objectSpread({}, newProps, _defineProperty({}, tag.type, _objectSpread({}, tagProps)));
+                  break;
               }
             }
         }

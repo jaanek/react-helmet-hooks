@@ -46,12 +46,16 @@ export default function Helmet(props) {
         switch (tag.type) {
         case "html":
           newProps = { ...newProps, htmlAttrs: {...newProps.htmlAttrs, ...tagProps} };
+          break;
         case "body":
           newProps = { ...newProps, bodyAttrs: {...newProps.bodyAttrs, ...tagProps} };
+          break;
         case "title":
           newProps = { ...newProps, [tag.type]: tagChildren, titleAttrs: {...tagProps}};
+          break;
         default:
           newProps = { ...newProps, [tag.type]: {...tagProps}};
+          break;
         }
       }
       }
