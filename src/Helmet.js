@@ -93,7 +93,7 @@ export default function Helmet(props) {
     const propsList = instances.map(instance => instance.current);
     const state = collectHelmet(propsList);
     setHelmet(state);
-  }, [...newProps]);
+  }, newProps);
 
   return null;
 }
