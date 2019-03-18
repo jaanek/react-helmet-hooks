@@ -239,6 +239,7 @@
       var state = collectHelmet(propsList);
       setHelmet(state);
     }, [newProps]);
+    console.log("Helmet props: ", newProps);
     return null;
   }
 

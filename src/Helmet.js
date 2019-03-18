@@ -95,6 +95,8 @@ export default function Helmet(props) {
     setHelmet(state);
   }, [newProps]);
 
+  console.log(`Helmet props: `, newProps);
+
   return null;
 }
 
