@@ -238,7 +238,7 @@
       });
       var state = collectHelmet(propsList);
       setHelmet(state);
-    }, _toConsumableArray(newProps));
+    }, [newProps]);
     return null;
   }
 
