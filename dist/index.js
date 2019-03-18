@@ -197,7 +197,6 @@
         return;
       }
 
-      console.log("Setting helmet state: ", state);
       return;
     };
 

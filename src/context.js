@@ -8,7 +8,6 @@ export default function Provider(props) {
       props.setHelmet(state);
       return;
     }
-    console.log("Setting helmet state: ", state);
     return;
   };
   const value = useRef({
