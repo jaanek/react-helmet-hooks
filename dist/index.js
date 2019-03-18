@@ -151,7 +151,7 @@
     }
 
     function mapTagsToProps(tags, newProps) {
-      var collectedTags = [];
+      var collectedTags = {};
       console.log("mapTagsToProps! ", tags, newProps);
       React__default.Children.forEach(tags, function (tag) {
         var _objectSpread3;

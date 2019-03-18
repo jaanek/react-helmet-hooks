@@ -21,7 +21,7 @@ export default function Helmet(props) {
   }
 
   function mapTagsToProps(tags, newProps) {
-    let collectedTags = [];
+    let collectedTags = {};
     console.log(`mapTagsToProps! `, tags, newProps);
 
     React.Children.forEach(tags, tag => {
