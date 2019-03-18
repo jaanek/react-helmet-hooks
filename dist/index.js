@@ -117,7 +117,7 @@
     }, props.children);
   }
 
-  function Helmet(props) {
+  var Helmet = React__default.memo(function Helmet(props) {
     var children = props.children,
         other = _objectWithoutProperties(props, ["children"]);
 
@@ -240,7 +240,7 @@
       setHelmet(state);
     }, [newProps]);
     return null;
-  }
+  });
 
   function collectHelmet(propsList) {
     return propsList.reduce(function (result, props) {

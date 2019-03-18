@@ -1,7 +1,7 @@
 import React, {useEffect, useContext, useRef} from 'react';
 import {Context} from './context';
 
-export default function Helmet(props) {
+export default React.memo(function Helmet(props) {
   const {children, ...other} = props;
   let newProps = other;
 
@@ -99,7 +99,7 @@ export default function Helmet(props) {
   }, [newProps]);
 
   return null;
-}
+});
 
 function collectHelmet(propsList) {
   return propsList.reduce((result, props) => {
