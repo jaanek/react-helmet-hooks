@@ -170,7 +170,7 @@
           case "style":
           case "script":
             {
-              collectedTags = _objectSpread({}, collectedTags, _defineProperty({}, tag.type, [].concat(_toConsumableArray(collectedTags[tag.type]), [_objectSpread({}, tagProps, mapTagChildrenToProps(tag, tagChildren))])));
+              collectedTags = _objectSpread({}, collectedTags, _defineProperty({}, tag.type, [].concat(_toConsumableArray(collectedTags[tag.type] || []), [_objectSpread({}, tagProps, mapTagChildrenToProps(tag, tagChildren))])));
               break;
             }
 

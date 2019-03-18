@@ -36,7 +36,7 @@ export default function Helmet(props) {
         collectedTags = {
           ...collectedTags,
           [tag.type]: [
-            ...collectedTags[tag.type],
+            ...(collectedTags[tag.type] || []),
             {...tagProps, ...mapTagChildrenToProps(tag, tagChildren)}
           ]
         };
