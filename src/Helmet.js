@@ -70,7 +70,7 @@ export default function Helmet(props) {
       const tagName = tagNames[i];
       result = {
         ...result,
-        [tagName]: tagNames[tagName]
+        [tagName]: collectedTags[tagName]
       };
     }
     console.log(`After result. result: `, result);

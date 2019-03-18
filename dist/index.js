@@ -210,7 +210,7 @@
 
       for (var i = 0; i < tagNames.length; i++) {
         var tagName = tagNames[i];
-        result = _objectSpread({}, result, _defineProperty({}, tagName, tagNames[tagName]));
+        result = _objectSpread({}, result, _defineProperty({}, tagName, collectedTags[tagName]));
       }
 
       console.log("After result. result: ", result);
