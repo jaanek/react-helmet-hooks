@@ -1,4 +1,5 @@
 import React, {useEffect, useContext, useRef} from 'react';
+import isEqual from 'react-fast-compare';
 import {Context} from './context';
 
 export default React.memo(function Helmet(props) {
@@ -99,6 +100,8 @@ export default React.memo(function Helmet(props) {
   }, [newProps]);
 
   return null;
+}, (prevProps, nextProps) => {
+  return isEqual(prevProps, nextProps);
 });
 
 function collectHelmet(propsList) {

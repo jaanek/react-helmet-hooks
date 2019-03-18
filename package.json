@@ -30,5 +30,7 @@
     "rollup-plugin-commonjs": "^9.2.1",
     "rollup-plugin-node-resolve": "^4.0.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-fast-compare": "^2.0.4"
+  }
 }
