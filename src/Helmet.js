@@ -24,9 +24,8 @@ export default function Helmet(props) {
     let collectedTags = [];
     console.log(`mapTagsToProps! `, tags, newProps);
 
-    for (let i=0; i < tags.length; i++) {
-      const tag = tags[i];
-      if (!tag || !tag.props) { continue; }
+    React.Children.forEach(tags, tag => {
+      if (!tag || !tag.props) { return; }
 
       const {children: tagChildren, ...tagProps} = tag.props;
       switch (tag.type) {
@@ -56,7 +55,7 @@ export default function Helmet(props) {
         }
       }
       }
-    }
+    });
 
     // merge props with collected multi tags
     let result = {...newProps};

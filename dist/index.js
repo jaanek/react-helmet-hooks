@@ -151,16 +151,13 @@
     }
 
     function mapTagsToProps(tags, newProps) {
-      var _objectSpread3;
-
       var collectedTags = [];
       console.log("mapTagsToProps! ", tags, newProps);
-
-      for (var i = 0; i < tags.length; i++) {
-        var tag = tags[i];
+      React__default.Children.forEach(tags, function (tag) {
+        var _objectSpread3;
 
         if (!tag || !tag.props) {
-          continue;
+          return;
         }
 
         var _tag$props = tag.props,
@@ -198,15 +195,14 @@
               }
             }
         }
-      } // merge props with collected multi tags
-
+      }); // merge props with collected multi tags
 
       var result = _objectSpread({}, newProps);
 
       var tagNames = Object.keys(collectedTags);
 
-      for (var _i = 0; _i < tagNames.length; _i++) {
-        var tagName = tagNames[_i];
+      for (var i = 0; i < tagNames.length; i++) {
+        var tagName = tagNames[i];
         result = _objectSpread({}, result, _defineProperty({}, tagName, tagNames[tagName]));
       }
 
