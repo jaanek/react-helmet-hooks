@@ -171,6 +171,7 @@
           case "script":
             {
               collectedTags = _objectSpread({}, collectedTags, _defineProperty({}, tag.type, [].concat(_toConsumableArray(collectedTags[tag.type] || []), [_objectSpread({}, tagProps, mapTagChildrenToProps(tag, tagChildren))])));
+              console.log("Collected tags: ", collectedTags);
               break;
             }
 
@@ -201,6 +202,8 @@
         }
       }); // merge props with collected multi tags
 
+      console.log("Before result. Collected tags: ", collectedTags);
+
       var result = _objectSpread({}, newProps);
 
       var tagNames = Object.keys(collectedTags);
@@ -210,6 +213,7 @@
         result = _objectSpread({}, result, _defineProperty({}, tagName, tagNames[tagName]));
       }
 
+      console.log("After result. result: ", result);
       return result;
     }
 

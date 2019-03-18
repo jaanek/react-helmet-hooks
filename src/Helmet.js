@@ -40,6 +40,7 @@ export default function Helmet(props) {
             {...tagProps, ...mapTagChildrenToProps(tag, tagChildren)}
           ]
         };
+        console.log(`Collected tags: `, collectedTags);
         break;
       }
       default: {
@@ -62,6 +63,7 @@ export default function Helmet(props) {
     });
 
     // merge props with collected multi tags
+    console.log(`Before result. Collected tags: `, collectedTags);
     let result = {...newProps};
     const tagNames = Object.keys(collectedTags);
     for (let i=0; i < tagNames.length; i++) {
@@ -71,6 +73,7 @@ export default function Helmet(props) {
         [tagName]: tagNames[tagName]
       };
     }
+    console.log(`After result. result: `, result);
     return result;
   }
 
