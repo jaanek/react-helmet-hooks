@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react')) :
-  typeof define === 'function' && define.amd ? define(['react'], factory) :
-  (global = global || self, global.reactHelmetHooks = factory(global.React));
-}(this, function (React) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'react'], factory) :
+  (global = global || self, factory(global.reactHelmetHooks = {}, global.React));
+}(this, function (exports, React) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
 
@@ -97,6 +97,25 @@
   }
 
   var Context = React__default.createContext({});
+  function Provider(props) {
+    var setHelmet = function setHelmet(state) {
+      if (props.setHelmet) {
+        props.setHelmet(state);
+        return;
+      }
+
+      console.log("Setting helmet state: ", state);
+      return;
+    };
+
+    var value = React.useRef({
+      setHelmet: setHelmet,
+      instances: []
+    });
+    return React__default.createElement(Context.Provider, {
+      value: value
+    }, props.children);
+  }
 
   function Helmet(props) {
     var children = props.children,
@@ -229,6 +248,9 @@
     }, {});
   }
 
-  return Helmet;
+  exports.Helmet = Helmet;
+  exports.Provider = Provider;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 }));

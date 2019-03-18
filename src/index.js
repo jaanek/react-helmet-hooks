@@ -1,2 +1,3 @@
 import Helmet from './Helmet';
-export default Helmet;
+import Provider from './context';
+export {Helmet, Provider};
