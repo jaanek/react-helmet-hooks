@@ -154,6 +154,7 @@
       var _objectSpread3;
 
       var collectedTags = [];
+      console.log("mapTagsToProps! ", tags, newProps);
 
       for (var i = 0; i < tags.length; i++) {
         var tag = tags[i];

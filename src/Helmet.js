@@ -22,6 +22,7 @@ export default function Helmet(props) {
 
   function mapTagsToProps(tags, newProps) {
     let collectedTags = [];
+    console.log(`mapTagsToProps! `, tags, newProps);
 
     for (let i=0; i < tags.length; i++) {
       const tag = tags[i];
