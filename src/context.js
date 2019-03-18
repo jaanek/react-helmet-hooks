@@ -15,5 +15,5 @@ export default function Provider(props) {
     setHelmet: setHelmet,
     instances: []
   });
-  return <Context.Provider value={value}>{props.children}</Context.Provider>;
+  return <Context.Provider value={value.current}>{props.children}</Context.Provider>;
 }

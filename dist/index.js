@@ -113,7 +113,7 @@
       instances: []
     });
     return React__default.createElement(Context.Provider, {
-      value: value
+      value: value.current
     }, props.children);
   }
 
@@ -230,7 +230,7 @@
         var index = instances.indexOf(instance);
         instances.splice(index, 1);
       };
-    }, []); // if helmet has changed then collect state from all helmet instances
+    }, [instances]); // if helmet has changed then collect state from all helmet instances
 
     React.useEffect(function () {
       var propsList = instances.map(function (instance) {

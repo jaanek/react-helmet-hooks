@@ -86,7 +86,7 @@ export default function Helmet(props) {
       const index = instances.indexOf(instance);
       instances.splice(index, 1);
     };
-  }, []);
+  }, [instances]);
 
   // if helmet has changed then collect state from all helmet instances
   useEffect(() => {
