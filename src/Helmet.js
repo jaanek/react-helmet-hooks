@@ -10,7 +10,7 @@ export default React.memo(function Helmet(props) {
     if (!tagChildren) { return null; }
     switch (tag.type) {
     case "style": {
-      return {cssText: tagChildren};
+      return {text: tagChildren};
     }
     case "script": {
       return {text: tagChildren};
