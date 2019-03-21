@@ -72,14 +72,15 @@ export default React.memo(function Helmet(props) {
     return result;
   }
 
+  let helmet = newProps;
   if (children) {
-    newProps = mapTagsToProps(children, newProps);
+    helmet = mapTagsToProps(children, newProps);
   }
 
   // trigger helmet state sync
   const {instances, setHelmet} = useContext(Context);
-  const instance = useRef(newProps);
-  instance.current = newProps;
+  const instance = useRef(helmet);
+  instance.current = helmet;
 
   // register and unregister a helmet instance
   useEffect(() => {
@@ -90,20 +91,56 @@ export default React.memo(function Helmet(props) {
     };
   }, [instances]);
 
-  // if helmet has changed then collect state from all helmet instances
+  // if helmet has changed then propate all helmet states to the userland
   useEffect(() => {
-    const propsList = instances.map(instance => instance.current);
-    const state = collectHelmet(propsList);
-    setHelmet(state);
-  }, [newProps]);
+    const helmets = instances.map(instance => instance.current);
+    setHelmet(helmets);
+  }, [helmet]);
 
   return null;
 }, (prevProps, nextProps) => {
   return isEqual(prevProps, nextProps);
 });
 
-function collectHelmet(propsList) {
-  return propsList.reduce((result, props) => {
-    return {...result, ...props};
-  }, {});
+export function mergeHelmets(helmets) {
+  const result = {};
+  for (let i=0; i < helmets.length; i++) {
+    const helmet = helmets[i];
+    const propNames = Object.keys(helmet);
+    propNames.forEach(propName => {
+      const props = helmet[propName];
+      switch (propName) {
+      case "meta":
+      case "link":
+      case "style":
+      case "script":{
+        result = {
+          ...result,
+          [propName]: [
+            ...(result[propName] || []),
+            ...props
+          ]
+        };
+        break;
+      }
+      default: {
+        switch (propName) {
+        case "html":
+          result[propName] = props;
+          break;
+        case "body":
+          result[propName] = props;
+          break;
+        case "title":
+          result[propName] = props;
+          break;
+        default:
+          result[propName] = props;
+          break;
+        }
+      }
+      }
+    });
+  }
+  return result;
 }
