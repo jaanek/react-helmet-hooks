@@ -222,12 +222,6 @@
 
       switch (tag.type) {
         case "style":
-          {
-            return {
-              cssText: tagChildren
-            };
-          }
-
         case "script":
           {
             return {
@@ -304,8 +298,10 @@
       return result;
     }
 
+    var helmet = newProps;
+
     if (children) {
-      newProps = mapTagsToProps(children, newProps);
+      helmet = mapTagsToProps(children, newProps);
     } // trigger helmet state sync
 
 
@@ -313,8 +309,8 @@
         instances = _useContext.instances,
         setHelmet = _useContext.setHelmet;
 
-    var instance = React.useRef(newProps);
-    instance.current = newProps; // register and unregister a helmet instance
+    var instance = React.useRef(helmet);
+    instance.current = helmet; // register and unregister a helmet instance
 
     React.useEffect(function () {
       instances.push(instance);
@@ -322,25 +318,18 @@
         var index = instances.indexOf(instance);
         instances.splice(index, 1);
       };
-    }, [instances]); // if helmet has changed then collect state from all helmet instances
+    }, [instances]); // if helmet has changed then propate all helmet states to the userland
 
     React.useEffect(function () {
-      var propsList = instances.map(function (instance) {
+      var helmets = instances.map(function (instance) {
         return instance.current;
       });
-      var state = collectHelmet(propsList);
-      setHelmet(state);
-    }, [newProps]);
+      setHelmet(helmets);
+    }, [helmet]);
     return null;
   }, function (prevProps, nextProps) {
     return reactFastCompare(prevProps, nextProps);
   });
-
-  function collectHelmet(propsList) {
-    return propsList.reduce(function (result, props) {
-      return _objectSpread({}, result, props);
-    }, {});
-  }
 
   exports.Helmet = Helmet;
   exports.Provider = Provider;
