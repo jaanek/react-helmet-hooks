@@ -3,7 +3,7 @@ import isEqual from 'react-fast-compare';
 import {Context} from './context';
 
 export default React.memo(function Helmet(props) {
-  const {children, ...other} = props;
+  const {children, onLoad, ...other} = props;
   let newProps = other;
 
   function mapTagChildrenToProps(tag, tagChildren) {
@@ -93,7 +93,10 @@ export default React.memo(function Helmet(props) {
 
   // if helmet has changed then propate all helmet states to the userland
   useEffect(() => {
-    const helmets = instances.map(instance => instance.current);
+    const helmets = instances.map(instance => ({
+      onLoad: onLoad,
+      helmet: instance.current
+    }));
     setHelmet(helmets);
   }, [helmet]);
 
@@ -105,7 +108,7 @@ export default React.memo(function Helmet(props) {
 export function mergeHelmets(helmets) {
   const result = {};
   for (let i=0; i < helmets.length; i++) {
-    const helmet = helmets[i];
+    const {helmet} = helmets[i];
     const propNames = Object.keys(helmet);
     propNames.forEach(propName => {
       const props = helmet[propName];
