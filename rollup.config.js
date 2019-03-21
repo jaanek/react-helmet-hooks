@@ -3,11 +3,15 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 
 export default {
+  external: ['react'],
   input: 'src/index.js',
   output: {
     file: 'dist/index.js',
     format: 'umd',
-    name: 'reactHelmetHooks'
+    name: 'reactHelmetHooks',
+    globals: {
+      'react': 'React'
+    }
   },
   plugins: [
     resolve({

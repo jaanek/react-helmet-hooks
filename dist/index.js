@@ -76,6 +76,10 @@
     return target;
   }
 
+  function _readOnlyError(name) {
+    throw new Error("\"" + name + "\" is read-only");
+  }
+
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
   }
@@ -211,7 +215,8 @@
 
   var Helmet = React__default.memo(function Helmet(props) {
     var children = props.children,
-        other = _objectWithoutProperties(props, ["children"]);
+        onLoad = props.onLoad,
+        other = _objectWithoutProperties(props, ["children", "onLoad"]);
 
     var newProps = other;
 
@@ -322,7 +327,10 @@
 
     React.useEffect(function () {
       var helmets = instances.map(function (instance) {
-        return instance.current;
+        return {
+          onLoad: onLoad,
+          helmet: instance.current
+        };
       });
       setHelmet(helmets);
     }, [helmet]);
@@ -330,9 +338,59 @@
   }, function (prevProps, nextProps) {
     return reactFastCompare(prevProps, nextProps);
   });
+  function mergeHelmets(helmets) {
+    var result = {};
+
+    var _loop = function _loop(i) {
+      var helmet = helmets[i].helmet;
+      var propNames = Object.keys(helmet);
+      propNames.forEach(function (propName) {
+        var props = helmet[propName];
+
+        switch (propName) {
+          case "meta":
+          case "link":
+          case "style":
+          case "script":
+            {
+              result = (_readOnlyError("result"), _objectSpread({}, result, _defineProperty({}, propName, [].concat(_toConsumableArray(result[propName] || []), _toConsumableArray(props)))));
+              break;
+            }
+
+          default:
+            {
+              switch (propName) {
+                case "html":
+                  result[propName] = props;
+                  break;
+
+                case "body":
+                  result[propName] = props;
+                  break;
+
+                case "title":
+                  result[propName] = props;
+                  break;
+
+                default:
+                  result[propName] = props;
+                  break;
+              }
+            }
+        }
+      });
+    };
+
+    for (var i = 0; i < helmets.length; i++) {
+      _loop(i);
+    }
+
+    return result;
+  }
 
   exports.Helmet = Helmet;
   exports.Provider = Provider;
+  exports.mergeHelmets = mergeHelmets;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
