@@ -106,7 +106,7 @@ export default React.memo(function Helmet(props) {
 });
 
 export function mergeHelmets(helmets) {
-  const result = {};
+  let result = {};
   for (let i=0; i < helmets.length; i++) {
     const {helmet} = helmets[i];
     const propNames = Object.keys(helmet);

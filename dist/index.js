@@ -76,10 +76,6 @@
     return target;
   }
 
-  function _readOnlyError(name) {
-    throw new Error("\"" + name + "\" is read-only");
-  }
-
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
   }
@@ -353,7 +349,7 @@
           case "style":
           case "script":
             {
-              result = (_readOnlyError("result"), _objectSpread({}, result, _defineProperty({}, propName, [].concat(_toConsumableArray(result[propName] || []), _toConsumableArray(props)))));
+              result = _objectSpread({}, result, _defineProperty({}, propName, [].concat(_toConsumableArray(result[propName] || []), _toConsumableArray(props))));
               break;
             }
 
